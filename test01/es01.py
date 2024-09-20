@@ -6,17 +6,16 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 
 to_remove = """.,"'0123456789()"""
 for x in to_remove:
-    txt = txt.replace(x,"")
+    txt = txt.replace(x, "")
 
 dct = {}
 
 for word in txt.split():
     word = word.lower()
     if word in dct:
-        dct[word] +=1
+        dct[word] += 1
     else:
-         dct[word] = 1
-
+        dct[word] = 1
 
 print(dct.keys())
 
@@ -24,8 +23,4 @@ keys = list(dct.keys())
 keys.sort()
 
 for k in keys:
-    print(k,":",dct[k])
-
-
-
-
+    print(k, ":", dct[k])
