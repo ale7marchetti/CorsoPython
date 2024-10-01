@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+
+# https://learngitbranching.js.org/
+
 tpl = (
     ("+", 1, 2, 3, 4, 5),
     ("*", 5, 4, 3),
