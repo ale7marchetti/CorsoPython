@@ -1,0 +1,139 @@
+{
+    "system": {
+        "base_url": "http://127.0.0.1:8000",
+        "log_file": "logs/02-books.log"
+    },
+    "actions": [
+        {
+            "title": "Verifico libreria",
+            "method": "GET",
+            "url": "/",
+            "auth": false,
+            "tests": [
+                {
+                    "field": "data.message",
+                    "mode": "EXISTS"   
+                }
+            ]
+        },
+        {
+            "method":"GET",
+            "url":"/books/clear",
+            "auth":false
+        },
+        {
+            "title": "Verifico create",
+            "method": "POST",
+            "url": "/books/add",
+            "auth": false,
+            "params": {
+                "id": 1,
+                "title": "Promessi sposi",
+                "author": "Alessandro Manzoni"
+                },
+            "tests":[
+                {
+                    "field": "data.id",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "title": "Verifico create",
+            "method": "POST",
+            "url": "/books/add",
+            "auth": false,
+            "params": {
+                "id": 2,
+                "title": "Romeo e Giulietta",
+                "author": "William Shakespeare"
+                },
+            "tests":[
+                {
+                    "field": "data.id",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "title": "Verifico lista",
+            "method": "GET",
+            "url": "/books/list",
+            "auth": false,
+            "tests":[
+                {
+                    "field": "data",
+                    "mode": "SIZE-GTE",
+                    "value": 2
+                },
+                {
+                    "field": "data[title=Romeo e Giulietta]",
+                    "mode": "EXISTS"
+                }
+            ]   
+        },
+        {
+            "method":"GET",
+            "url": "/books/2",
+            "auth":false,
+            "tests":[
+                {
+                    "field":"data.title",
+                    "value": "Romeo e Giulietta"
+                }
+            ]
+        },
+        {
+            "method":"GET",
+            "url": "/books/99",
+            "auth":false,
+            "tests":[
+                {
+                    "field":"data",
+                    "mode": "IS_NULL"
+                },
+                {
+                    "field": "error.code",
+                    "value": 404
+                }
+            ]
+        },
+        {
+            "method":"DELETE",
+            "url" : "/books/del/2",
+            "auth":false,
+            "tests":[
+                {
+                    "title": "primaD",
+                    "field": "data.deleted",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "method":"DELETE",
+            "url" : "/books/del/2",
+            "auth":false,
+            "tests":[
+                {
+                    "title": "secondaD",
+                    "field": "data.deleted",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "method":"GET",
+            "url" : "/books/list",
+            "auth":false,
+            "tests":[
+                {
+                    "field": "data",
+                    "mode": "LEN",
+                    "value": 1
+                }
+            ]
+        }
+
+    ]
+}

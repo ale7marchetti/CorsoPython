@@ -1,0 +1,74 @@
+{
+    "system": {
+        "base_url": "http://127.0.0.1:8000",
+        "log_file": "logs/01-hello.log"
+    },
+    "actions": [
+        {
+            "title": "Verifico hello",
+            "method": "GET",
+            "url": "/hello",
+            "auth": false,
+            "tests": [
+                {
+                    "field": "message",
+                    "value": "Hello world!"
+                }
+            ]
+        },
+        {
+            "method": "GET",
+            "url": "/hello/mario",
+            "auth": false,
+            "fields": [
+                [
+                    "name",
+                    "user_name"
+                ]
+            ],
+            "tests": [
+                {
+                    "field": "message",
+                    "value": "Hello, mario!"
+                },
+                {
+                    "field": "name",
+                    "value": "mario"
+                }
+            ]
+        },
+        {
+            "method": "GET",
+            "url": "/hello/mario",
+            "auth": false,
+            "tests": [
+                {
+                    "field": "name",
+                    "value": "%(user_name)s"
+                }
+            ]
+        },
+        {
+            "method": "POST",
+            "url": "/reverse",
+            "auth": false,
+            "params": {
+                "name": "mario"
+            },
+            "tests": [
+                {
+                    "field": "name",
+                    "value": "oiram"
+                },
+                {
+                    "field": "names.[1]",
+                    "value": "oiram"
+                },
+                {
+                    "field": "dct.rev",
+                    "value": "oiram"
+                }
+            ]
+        }
+    ]
+}
